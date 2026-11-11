@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Generated files are current
+        run: node scripts/build.mjs --check
+      - name: Run tests
+        run: node --test
+      - name: Validate the worked example against its target
+        run: node skills/ai-use-register/scripts/validate-register.mjs examples/register.json --root examples/target-app --today 2026-11-11
+      - name: Example scan is current
+        run: node skills/ai-use-register/scripts/scan.mjs examples/target-app --out /tmp/scan.json && diff /tmp/scan.json examples/ai-usage.json
+      - name: Install dry run for every agent
+        run: node scripts/install.mjs all --dry-run

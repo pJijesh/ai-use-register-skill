@@ -1,0 +1,105 @@
+{
+  "signatures": [
+    {
+      "category": "sdk",
+      "kind": "python_import",
+      "pattern": "^\\s*(?:from|import)\\s+(openai|anthropic|cohere|mistralai|google\\.generativeai|google\\.genai|vertexai|ollama|groq|together|replicate|litellm|transformers|huggingface_hub|sklearn|torch|tensorflow|keras|onnxruntime|xgboost|lightgbm|joblib)\\b",
+      "flags": "",
+      "files": [
+        "\\.py$"
+      ]
+    },
+    {
+      "category": "sdk",
+      "kind": "js_import",
+      "pattern": "(?:from\\s+|require\\(\\s*)['\"](openai|@anthropic-ai/sdk|@google/generative-ai|@google/genai|cohere-ai|@mistralai/mistralai|ollama|groq-sdk|ai|@ai-sdk/[a-z0-9-]+|@huggingface/inference|@xenova/transformers|onnxruntime-node|@tensorflow/tfjs[a-z-]*)['\"]",
+      "flags": "",
+      "files": [
+        "\\.(?:js|mjs|cjs|ts|tsx|jsx)$"
+      ]
+    },
+    {
+      "category": "sdk",
+      "kind": "python_dependency",
+      "pattern": "^\\s*(openai|anthropic|cohere|mistralai|google-generativeai|google-genai|ollama|groq|litellm|transformers|scikit-learn|torch|tensorflow|keras|onnxruntime|xgboost|lightgbm|langchain[a-z-]*|llama-index[a-z-]*|crewai|autogen[a-z-]*)\\s*(?:[=<>~!;\\[].*)?$",
+      "flags": "i",
+      "files": [
+        "requirements[^/]*\\.txt$"
+      ]
+    },
+    {
+      "category": "sdk",
+      "kind": "js_dependency",
+      "pattern": "\"(openai|@anthropic-ai/sdk|@google/generative-ai|@google/genai|cohere-ai|@mistralai/mistralai|ollama|groq-sdk|ai|@ai-sdk/[a-z0-9-]+|langchain|@langchain/[a-z0-9-]+|@huggingface/inference|onnxruntime-node)\"\\s*:",
+      "flags": "",
+      "files": [
+        "(?:^|/)package\\.json$"
+      ]
+    },
+    {
+      "category": "framework",
+      "kind": "agent_framework",
+      "pattern": "^\\s*(?:from|import)\\s+(langchain[a-z_.]*|langgraph|llama_index|crewai|autogen|smolagents|semantic_kernel)\\b",
+      "flags": "",
+      "files": [
+        "\\.py$"
+      ]
+    },
+    {
+      "category": "endpoint",
+      "kind": "model_api",
+      "pattern": "https?://(api\\.openai\\.com|api\\.anthropic\\.com|generativelanguage\\.googleapis\\.com|api\\.cohere\\.(?:ai|com)|api\\.mistral\\.ai|api\\.groq\\.com|[a-z0-9.-]+\\.openai\\.azure\\.com|bedrock-runtime\\.[a-z0-9-]+\\.amazonaws\\.com|api-inference\\.huggingface\\.co)",
+      "flags": ""
+    },
+    {
+      "category": "endpoint",
+      "kind": "local_runtime",
+      "pattern": "https?://((?:localhost|127\\.0\\.0\\.1):11434)",
+      "flags": ""
+    },
+    {
+      "category": "model",
+      "kind": "model_id",
+      "pattern": "['\"`]((?:gpt-[0-9][a-z0-9.\\-]*|o[134](?:-mini|-preview)?|claude-[a-z0-9.\\-]+|gemini-[0-9][a-z0-9.\\-]*|llama-?[0-9][a-z0-9.\\-:]*|mistral-[a-z0-9.\\-]+|mixtral-[a-z0-9.\\-]+|command-r[a-z0-9\\-+]*|text-embedding-[a-z0-9\\-]+|whisper-[a-z0-9\\-]+))['\"`]",
+      "flags": ""
+    },
+    {
+      "category": "secret_reference",
+      "kind": "env_var",
+      "pattern": "\\b(OPENAI_API_KEY|ANTHROPIC_API_KEY|GEMINI_API_KEY|COHERE_API_KEY|MISTRAL_API_KEY|GROQ_API_KEY|AZURE_OPENAI_[A-Z_]+|HF_TOKEN|HUGGINGFACEHUB_API_TOKEN)\\b",
+      "flags": ""
+    },
+    {
+      "category": "prompt",
+      "kind": "system_prompt",
+      "pattern": "(\\bsystem_prompt\\b|\\bSYSTEM_PROMPT\\b|\\bsystem_message\\b|[\"']role[\"']\\s*:\\s*[\"']system[\"']|\\brole\\s*=\\s*[\"']system[\"'])",
+      "flags": ""
+    },
+    {
+      "category": "tools",
+      "kind": "tool_definition",
+      "pattern": "(\\btools\\s*=\\s*[\\[A-Za-z_]|[\"']tools[\"']\\s*:|\\btool_choice\\b|\\bfunction_call\\b|\\btool_use\\b|@tool\\b|\\bFastMCP\\b|\\bMcpServer\\b)",
+      "flags": ""
+    },
+    {
+      "category": "data_hint",
+      "kind": "personal_data_hint",
+      "pattern": "\\b(cv|resume|candidate|applicant|salary|date_of_birth|dob|passport|national_insurance|health|medical|diagnosis|ethnicity|religion|biometric|facial|fingerprint|credit_score|customer_email|full_name)\\b",
+      "flags": "i",
+      "onlyInFilesWithAiEvidence": true
+    }
+  ],
+  "path_signatures": [
+    {
+      "category": "prompt",
+      "kind": "prompt_file",
+      "pattern": "(?:^|/)prompts?/[^/]+$|\\.prompt(?:\\.md|\\.txt)?$|(?:^|/)system[_-]prompt[^/]*$"
+    },
+    {
+      "category": "model_artifact",
+      "kind": "model_file",
+      "pattern": "\\.(?:pkl|joblib|onnx|pt|pth|safetensors|gguf|h5|tflite)$",
+      "fileOnly": true
+    }
+  ]
+}

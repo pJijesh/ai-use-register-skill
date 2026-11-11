@@ -1,0 +1,28 @@
+{
+  "rules": [
+    { "id": "REG001", "severity": "error", "summary": "The file is not valid JSON or does not have a systems array" },
+    { "id": "REG002", "severity": "error", "summary": "A required field is missing or empty" },
+    { "id": "REG003", "severity": "error", "summary": "Two systems share an id, or an id is not AI-NNN" },
+    { "id": "REG004", "severity": "error", "summary": "A value is not one of the allowed options" },
+    { "id": "REG005", "severity": "error", "summary": "A date is not a real YYYY-MM-DD date" },
+    { "id": "REG006", "severity": "error", "summary": "next_review is not after last_reviewed" },
+    { "id": "REG007", "severity": "error", "summary": "A pilot or production system has no named owner" },
+    { "id": "REG008", "severity": "error", "summary": "Tier minimal without both the prohibited-practices and Annex III checks recorded" },
+    { "id": "REG009", "severity": "error", "summary": "Tier high_risk without a valid annex_iii_area" },
+    { "id": "REG010", "severity": "error", "summary": "A system in a prohibited tier is pilot or production" },
+    { "id": "REG011", "severity": "error", "summary": "Personal data is processed but no lawful basis is recorded" },
+    { "id": "REG012", "severity": "error", "summary": "Special category data or a high-risk tier without a DPIA status other than not_required" },
+    { "id": "REG013", "severity": "error", "summary": "A production system has no recorded risks" },
+    { "id": "REG014", "severity": "error", "summary": "A high-risk system has no human oversight description" },
+    { "id": "REG015", "severity": "error", "summary": "An ISO/IEC 42001 control id is not a known Annex A control" },
+    { "id": "REG016", "severity": "error", "summary": "An evidence quote is not in the file at the given lines" },
+    { "id": "REG017", "severity": "error", "summary": "An evidence file does not exist" },
+    { "id": "REG018", "severity": "error", "summary": "An evidence path escapes the scanned folder" },
+    { "id": "REG019", "severity": "warning", "summary": "A production system is still needs_assessment" },
+    { "id": "REG020", "severity": "warning", "summary": "A high-risk system acts autonomously" },
+    { "id": "REG021", "severity": "warning", "summary": "A review date has passed" },
+    { "id": "REG022", "severity": "warning", "summary": "A production system maps to no ISO/IEC 42001 controls" },
+    { "id": "REG023", "severity": "warning", "summary": "A system has no evidence entries" },
+    { "id": "REG024", "severity": "warning", "summary": "A system has no models listed" }
+  ]
+}

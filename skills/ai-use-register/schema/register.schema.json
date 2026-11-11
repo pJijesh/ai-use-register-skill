@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI system register",
+  "description": "Documents the shape of register.json. validate-register.mjs is the authoritative checker and also enforces rules that a schema cannot express.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "systems"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "organisation": {
+      "type": "string"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "owner",
+          "purpose",
+          "status",
+          "users",
+          "models",
+          "data",
+          "autonomy",
+          "eu_ai_act",
+          "last_reviewed",
+          "next_review"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^AI-\\d{3,}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "idea",
+              "pilot",
+              "production",
+              "retired"
+            ]
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "staff",
+                "customers",
+                "candidates",
+                "public",
+                "other"
+              ]
+            },
+            "minItems": 1
+          },
+          "models": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "hosting"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "hosting": {
+                  "enum": [
+                    "vendor_api",
+                    "self_hosted",
+                    "embedded",
+                    "unknown"
+                  ]
+                }
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "categories",
+              "personal_data",
+              "special_category",
+              "leaves_organisation"
+            ],
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "personal_data": {
+                "type": "boolean"
+              },
+              "special_category": {
+                "type": "boolean"
+              },
+              "leaves_organisation": {
+                "type": "boolean"
+              }
+            }
+          },
+          "lawful_basis": {
+            "enum": [
+              "consent",
+              "contract",
+              "legal_obligation",
+              "vital_interests",
+              "public_task",
+              "legitimate_interests"
+            ]
+          },
+          "dpia": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "not_required",
+                  "required_not_started",
+                  "in_progress",
+                  "complete"
+                ]
+              },
+              "ref": {
+                "type": "string"
+              }
+            }
+          },
+          "autonomy": {
+            "enum": [
+              "suggests",
+              "human_decides",
+              "acts_with_approval",
+              "acts_autonomously"
+            ]
+          },
+          "human_oversight": {
+            "type": "string"
+          },
+          "eu_ai_act": {
+            "type": "object",
+            "required": [
+              "tier",
+              "role",
+              "rationale",
+              "confidence",
+              "assessed_on"
+            ],
+            "properties": {
+              "tier": {
+                "enum": [
+                  "prohibited",
+                  "high_risk",
+                  "transparency",
+                  "minimal",
+                  "gpai_provider",
+                  "needs_assessment"
+                ]
+              },
+              "annex_iii_area": {
+                "enum": [
+                  "biometrics",
+                  "critical_infrastructure",
+                  "education",
+                  "employment",
+                  "essential_services",
+                  "law_enforcement",
+                  "migration_border",
+                  "justice_democracy"
+                ]
+              },
+              "basis": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "prohibited_checked": {
+                "type": "boolean"
+              },
+              "annex_iii_checked": {
+                "type": "boolean"
+              },
+              "role": {
+                "enum": [
+                  "provider",
+                  "deployer",
+                  "both",
+                  "not_assessed"
+                ]
+              },
+              "rationale": {
+                "type": "string"
+              },
+              "confidence": {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              "assessed_on": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              }
+            }
+          },
+          "iso42001": {
+            "type": "object",
+            "properties": {
+              "controls": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^A\\.\\d+\\.\\d+(\\.\\d+)?$"
+                }
+              },
+              "gaps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "description",
+                "likelihood",
+                "impact",
+                "mitigation"
+              ],
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "likelihood": {
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "impact": {
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "mitigation": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "file",
+                "start_line",
+                "quote"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string"
+                },
+                "start_line": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "end_line": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "quote": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "last_reviewed": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "next_review": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

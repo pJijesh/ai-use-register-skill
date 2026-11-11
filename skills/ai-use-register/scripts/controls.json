@@ -1,0 +1,195 @@
+{
+  "note": "Annex A control identifiers with short paraphrased titles. Check the published standard for the authoritative wording.",
+  "controls": [
+    {
+      "id": "A.2.2",
+      "area": "A.2 Policies related to AI",
+      "title": "Organisational AI policy"
+    },
+    {
+      "id": "A.2.3",
+      "area": "A.2 Policies related to AI",
+      "title": "Fit with other organisational policies"
+    },
+    {
+      "id": "A.2.4",
+      "area": "A.2 Policies related to AI",
+      "title": "Review cycle for the AI policy"
+    },
+    {
+      "id": "A.3.2",
+      "area": "A.3 Internal organisation",
+      "title": "Allocation of AI roles and responsibilities"
+    },
+    {
+      "id": "A.3.3",
+      "area": "A.3 Internal organisation",
+      "title": "Channel for raising concerns"
+    },
+    {
+      "id": "A.4.2",
+      "area": "A.4 Resources for AI systems",
+      "title": "Documenting the resources a system needs"
+    },
+    {
+      "id": "A.4.3",
+      "area": "A.4 Resources for AI systems",
+      "title": "Data resources"
+    },
+    {
+      "id": "A.4.4",
+      "area": "A.4 Resources for AI systems",
+      "title": "Tooling resources"
+    },
+    {
+      "id": "A.4.5",
+      "area": "A.4 Resources for AI systems",
+      "title": "System and computing resources"
+    },
+    {
+      "id": "A.4.6",
+      "area": "A.4 Resources for AI systems",
+      "title": "People and skills"
+    },
+    {
+      "id": "A.5.2",
+      "area": "A.5 Assessing impacts of AI systems",
+      "title": "Impact assessment procedure"
+    },
+    {
+      "id": "A.5.3",
+      "area": "A.5 Assessing impacts of AI systems",
+      "title": "Recording impact assessment results"
+    },
+    {
+      "id": "A.5.4",
+      "area": "A.5 Assessing impacts of AI systems",
+      "title": "Effects on individuals and groups"
+    },
+    {
+      "id": "A.5.5",
+      "area": "A.5 Assessing impacts of AI systems",
+      "title": "Effects on society"
+    },
+    {
+      "id": "A.6.1.2",
+      "area": "A.6 AI system life cycle",
+      "title": "Goals for responsible development"
+    },
+    {
+      "id": "A.6.1.3",
+      "area": "A.6 AI system life cycle",
+      "title": "Responsible design and development process"
+    },
+    {
+      "id": "A.6.2.2",
+      "area": "A.6 AI system life cycle",
+      "title": "Requirements and specification"
+    },
+    {
+      "id": "A.6.2.3",
+      "area": "A.6 AI system life cycle",
+      "title": "Design and development records"
+    },
+    {
+      "id": "A.6.2.4",
+      "area": "A.6 AI system life cycle",
+      "title": "Verification and validation"
+    },
+    {
+      "id": "A.6.2.5",
+      "area": "A.6 AI system life cycle",
+      "title": "Deployment"
+    },
+    {
+      "id": "A.6.2.6",
+      "area": "A.6 AI system life cycle",
+      "title": "Operation and monitoring"
+    },
+    {
+      "id": "A.6.2.7",
+      "area": "A.6 AI system life cycle",
+      "title": "Technical documentation"
+    },
+    {
+      "id": "A.6.2.8",
+      "area": "A.6 AI system life cycle",
+      "title": "Recording of event logs"
+    },
+    {
+      "id": "A.7.2",
+      "area": "A.7 Data for AI systems",
+      "title": "Data for development and improvement"
+    },
+    {
+      "id": "A.7.3",
+      "area": "A.7 Data for AI systems",
+      "title": "Obtaining data"
+    },
+    {
+      "id": "A.7.4",
+      "area": "A.7 Data for AI systems",
+      "title": "Data quality"
+    },
+    {
+      "id": "A.7.5",
+      "area": "A.7 Data for AI systems",
+      "title": "Data provenance"
+    },
+    {
+      "id": "A.7.6",
+      "area": "A.7 Data for AI systems",
+      "title": "Data preparation"
+    },
+    {
+      "id": "A.8.2",
+      "area": "A.8 Information for interested parties",
+      "title": "User documentation and information"
+    },
+    {
+      "id": "A.8.3",
+      "area": "A.8 Information for interested parties",
+      "title": "External reporting"
+    },
+    {
+      "id": "A.8.4",
+      "area": "A.8 Information for interested parties",
+      "title": "Communication of incidents"
+    },
+    {
+      "id": "A.8.5",
+      "area": "A.8 Information for interested parties",
+      "title": "Information for interested parties"
+    },
+    {
+      "id": "A.9.2",
+      "area": "A.9 Use of AI systems",
+      "title": "Processes for responsible use"
+    },
+    {
+      "id": "A.9.3",
+      "area": "A.9 Use of AI systems",
+      "title": "Objectives for responsible use"
+    },
+    {
+      "id": "A.9.4",
+      "area": "A.9 Use of AI systems",
+      "title": "Intended use"
+    },
+    {
+      "id": "A.10.2",
+      "area": "A.10 Third-party and customer relationships",
+      "title": "Allocating responsibilities"
+    },
+    {
+      "id": "A.10.3",
+      "area": "A.10 Third-party and customer relationships",
+      "title": "Suppliers"
+    },
+    {
+      "id": "A.10.4",
+      "area": "A.10 Third-party and customer relationships",
+      "title": "Customers"
+    }
+  ]
+}

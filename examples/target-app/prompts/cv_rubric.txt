@@ -1,0 +1,1 @@
+Score the candidate from 0 to 100 for fit to the role. Return JSON with a score and a one line reason.

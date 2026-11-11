@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "organisation": "Fernwood Services (fictional)",
+  "as_of": "2026-11-11",
+  "systems": [
+    {
+      "id": "AI-001",
+      "name": "Customer chat assistant",
+      "owner": "Head of Customer Support",
+      "purpose": "Answers customer questions about orders and returns in the help centre and can look up and refund orders.",
+      "status": "production",
+      "users": [
+        "customers"
+      ],
+      "models": [
+        {
+          "name": "claude-sonnet-4-5",
+          "provider": "Anthropic",
+          "hosting": "vendor_api"
+        }
+      ],
+      "data": {
+        "categories": [
+          "customer messages",
+          "customer email address",
+          "order numbers"
+        ],
+        "personal_data": true,
+        "special_category": false,
+        "leaves_organisation": true
+      },
+      "lawful_basis": "contract",
+      "dpia": {
+        "status": "not_required"
+      },
+      "autonomy": "acts_autonomously",
+      "human_oversight": "Not evidenced in code. Owner to confirm whether a person approves refunds issued through the issue_refund tool.",
+      "eu_ai_act": {
+        "tier": "transparency",
+        "basis": [
+          "Article 50(1): people must be told they are interacting with an AI system"
+        ],
+        "prohibited_checked": true,
+        "annex_iii_checked": true,
+        "role": "deployer",
+        "rationale": "A chatbot that talks to customers. No Annex III area applies on the facts available. The main obligation is to make clear to customers that they are talking to an AI system, which the code does not show.",
+        "confidence": "medium",
+        "assessed_on": "2026-11-10"
+      },
+      "iso42001": {
+        "controls": [
+          "A.6.2.6",
+          "A.8.2",
+          "A.9.2",
+          "A.9.4",
+          "A.10.3"
+        ],
+        "gaps": [
+          "No evidence that customers are told they are talking to an AI system (A.8.2)",
+          "Refund approval step not evidenced (A.9.2)"
+        ]
+      },
+      "risks": [
+        {
+          "description": "A customer message could instruct the assistant to issue refunds it should not (prompt injection).",
+          "likelihood": "medium",
+          "impact": "high",
+          "mitigation": "Cap refunds, require approval above a threshold, log every tool call."
+        },
+        {
+          "description": "The assistant gives a wrong answer about returns rights.",
+          "likelihood": "medium",
+          "impact": "medium",
+          "mitigation": "Ground answers in the published policy and offer a human route."
+        }
+      ],
+      "evidence": [
+        {
+          "file": "app/chat.py",
+          "start_line": 5,
+          "end_line": 5,
+          "quote": "client = anthropic.Anthropic(api_key=os.environ[\"ANTHROPIC_API_KEY\"])"
+        },
+        {
+          "file": "app/chat.py",
+          "start_line": 17,
+          "end_line": 17,
+          "quote": "model=\"claude-sonnet-4-5\","
+        },
+        {
+          "file": "app/chat.py",
+          "start_line": 11,
+          "end_line": 11,
+          "quote": "{\"name\": \"issue_refund\", \"description\": \"Refund an order up to 50 pounds\"},"
+        }
+      ],
+      "last_reviewed": "2026-11-10",
+      "next_review": "2027-05-10"
+    },
+    {
+      "id": "AI-002",
+      "name": "CV screening",
+      "owner": "Talent Acquisition Manager",
+      "purpose": "Scores candidate CVs against a rubric and builds a shortlist for recruiters.",
+      "status": "pilot",
+      "users": [
+        "staff",
+        "candidates"
+      ],
+      "models": [
+        {
+          "name": "gpt-4o-mini",
+          "provider": "OpenAI",
+          "hosting": "vendor_api"
+        }
+      ],
+      "data": {
+        "categories": [
+          "CV text",
+          "candidate name"
+        ],
+        "personal_data": true,
+        "special_category": false,
+        "leaves_organisation": true
+      },
+      "lawful_basis": "legitimate_interests",
+      "dpia": {
+        "status": "required_not_started"
+      },
+      "autonomy": "acts_autonomously",
+      "human_oversight": "Not evidenced in code: shortlist() drops candidates who score under 70 with no review step. Owner to confirm that recruiters review rejections.",
+      "eu_ai_act": {
+        "tier": "high_risk",
+        "annex_iii_area": "employment",
+        "basis": [
+          "Annex III, employment: AI systems used to filter or evaluate candidates in recruitment"
+        ],
+        "prohibited_checked": true,
+        "annex_iii_checked": true,
+        "role": "deployer",
+        "rationale": "The system filters and scores job applicants, which falls in the Annex III employment area. Deployer duties would apply, including human oversight and informing candidates. CVs can contain special category data even though none is requested.",
+        "confidence": "high",
+        "assessed_on": "2026-11-10"
+      },
+      "iso42001": {
+        "controls": [
+          "A.5.2",
+          "A.5.4",
+          "A.6.2.4",
+          "A.7.4",
+          "A.9.4",
+          "A.10.3"
+        ],
+        "gaps": [
+          "No impact assessment on candidates yet (A.5.2, A.5.4)",
+          "No testing for biased outcomes (A.6.2.4)",
+          "Human review of rejections not evidenced"
+        ]
+      },
+      "risks": [
+        {
+          "description": "Candidates are rejected on a score no person has checked.",
+          "likelihood": "high",
+          "impact": "high",
+          "mitigation": "Require a person to review every rejection before it is acted on."
+        },
+        {
+          "description": "The model scores some groups of candidates lower for reasons unrelated to the job.",
+          "likelihood": "medium",
+          "impact": "high",
+          "mitigation": "Test outcomes by group on a sample before wider use, and keep the rubric job-related."
+        }
+      ],
+      "evidence": [
+        {
+          "file": "app/cv_screen.py",
+          "start_line": 10,
+          "end_line": 10,
+          "quote": "\"https://api.openai.com/v1/chat/completions\","
+        },
+        {
+          "file": "app/cv_screen.py",
+          "start_line": 13,
+          "end_line": 13,
+          "quote": "\"model\": \"gpt-4o-mini\","
+        },
+        {
+          "file": "app/cv_screen.py",
+          "start_line": 26,
+          "end_line": 26,
+          "quote": "return [c for s, c in scored if s.get(\"score\", 0) >= 70]"
+        }
+      ],
+      "last_reviewed": "2026-11-10",
+      "next_review": "2027-02-10"
+    },
+    {
+      "id": "AI-003",
+      "name": "Meeting summariser",
+      "owner": "IT Operations Lead",
+      "purpose": "Summarises internal meeting transcripts into five bullets using a model on the office server.",
+      "status": "production",
+      "users": [
+        "staff"
+      ],
+      "models": [
+        {
+          "name": "llama3.1:8b",
+          "provider": "Meta (open weights)",
+          "hosting": "self_hosted"
+        }
+      ],
+      "data": {
+        "categories": [
+          "meeting transcripts"
+        ],
+        "personal_data": true,
+        "special_category": false,
+        "leaves_organisation": false
+      },
+      "lawful_basis": "legitimate_interests",
+      "dpia": {
+        "status": "not_required"
+      },
+      "autonomy": "suggests",
+      "eu_ai_act": {
+        "tier": "minimal",
+        "basis": [
+          "No Article 5 practice and no Annex III area applies; internal use only"
+        ],
+        "prohibited_checked": true,
+        "annex_iii_checked": true,
+        "role": "deployer",
+        "rationale": "Internal text summarisation that stays on the organisation's own server and informs no decision about a person.",
+        "confidence": "medium",
+        "assessed_on": "2026-11-10"
+      },
+      "iso42001": {
+        "controls": [
+          "A.4.4",
+          "A.6.2.6",
+          "A.9.2"
+        ],
+        "gaps": []
+      },
+      "risks": [
+        {
+          "description": "A summary misstates a decision or an action owner.",
+          "likelihood": "medium",
+          "impact": "low",
+          "mitigation": "Label summaries as machine-generated and keep the transcript available."
+        }
+      ],
+      "evidence": [
+        {
+          "file": "app/summarise.py",
+          "start_line": 7,
+          "end_line": 7,
+          "quote": "\"http://localhost:11434/api/generate\","
+        },
+        {
+          "file": "app/summarise.py",
+          "start_line": 8,
+          "end_line": 8,
+          "quote": "json={\"model\": \"llama3.1:8b\", \"prompt\": \"Summarise in five bullets:\\n\" + transcript},"
+        }
+      ],
+      "last_reviewed": "2026-11-10",
+      "next_review": "2027-05-10"
+    },
+    {
+      "id": "AI-004",
+      "name": "Product recommender",
+      "owner": "E-commerce Manager",
+      "purpose": "Suggests similar products from a nearest-neighbour model trained on browsing history.",
+      "status": "production",
+      "users": [
+        "customers"
+      ],
+      "models": [
+        {
+          "name": "scikit-learn NearestNeighbors",
+          "provider": "in-house",
+          "hosting": "embedded"
+        }
+      ],
+      "data": {
+        "categories": [
+          "browsing history"
+        ],
+        "personal_data": true,
+        "special_category": false,
+        "leaves_organisation": false
+      },
+      "lawful_basis": "legitimate_interests",
+      "dpia": {
+        "status": "not_required"
+      },
+      "autonomy": "suggests",
+      "eu_ai_act": {
+        "tier": "minimal",
+        "basis": [
+          "No Article 5 practice and no Annex III area applies; suggestions only"
+        ],
+        "prohibited_checked": true,
+        "annex_iii_checked": true,
+        "role": "provider",
+        "rationale": "A conventional machine learning recommender that shows product suggestions. The organisation built it and uses it, so it is both provider and deployer; the tier does not change.",
+        "confidence": "medium",
+        "assessed_on": "2026-04-01"
+      },
+      "iso42001": {
+        "controls": [
+          "A.6.2.6",
+          "A.7.4"
+        ],
+        "gaps": []
+      },
+      "risks": [
+        {
+          "description": "Recommendations narrow over time and favour popular items.",
+          "likelihood": "medium",
+          "impact": "low",
+          "mitigation": "Review click and purchase diversity each quarter."
+        }
+      ],
+      "evidence": [
+        {
+          "file": "app/recommend.py",
+          "start_line": 5,
+          "end_line": 5,
+          "quote": "model = joblib.load(\"models/recommender.joblib\")"
+        }
+      ],
+      "last_reviewed": "2026-04-01",
+      "next_review": "2026-10-01"
+    }
+  ]
+}
